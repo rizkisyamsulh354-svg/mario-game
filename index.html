@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Super Mario SpongeBob</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="game-shell">
+    <header>
+      <h1>Super Mario SpongeBob</h1>
+      <div class="hud">
+        <div>Level: <span id="levelDisplay">1</span></div>
+        <div>Nyawa: <span id="livesDisplay">3</span></div>
+        <div>Ammo: <span id="ammoDisplay">3</span></div>
+        <div>Skor: <span id="scoreDisplay">0</span></div>
+      </div>
+    </header>
+
+    <canvas id="gameCanvas" width="900" height="450"></canvas>
+
+    <section class="instructions">
+      <h2>Kontrol</h2>
+      <ul>
+        <li><strong>Arrow Left / Arrow Right</strong> - Gerak kiri / kanan</li>
+        <li><strong>Arrow Up / W</strong> - Lompat</li>
+        <li><strong>Space</strong> - Tembak gelembung</li>
+      </ul>
+      <p>
+        Awal permainan hanya memiliki 3 amunisi gelembung. Ambil kotak hadiah berwarna untuk menambah amunisi.
+      </p>
+      <p>
+        Hancurkan rintangan dengan gelembung atau hindari musuh yang bergerak. Jika nyawa habis, level akan diulang.
+      </p>
+    </section>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
