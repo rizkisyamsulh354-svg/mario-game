@@ -115,18 +115,14 @@ function nextLevel() {
   resetPlayer();
 }
 
-function drawRoundedRect(x, y, w, h, radius) {
-  ctx.beginPath();
-  ctx.moveTo(x + radius, y);
-  ctx.lineTo(x + w - radius, y);
-  ctx.quadraticCurveTo(x + w, y, x + w, y + radius);
-  ctx.lineTo(x + w, y + h - radius);
-  ctx.quadraticCurveTo(x + w, y + h, x + w - radius, y + h);
-  ctx.lineTo(x + radius, y + h);
-  ctx.quadraticCurveTo(x, y + h, x, y + h - radius);
-  ctx.lineTo(x, y + radius);
-  ctx.quadraticCurveTo(x, y, x + radius, y);
-  ctx.fill();
+function drawBlock(x, y, w, h, color, outline = true) {
+  ctx.fillStyle = color;
+  ctx.fillRect(x, y, w, h);
+  if (outline) {
+    ctx.strokeStyle = "#1c1c1c";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(x, y, w, h);
+  }
 }
 
 function drawScene() {
@@ -141,13 +137,11 @@ function drawScene() {
   const level = levels[state.levelIndex];
 
   level.obstacles.forEach(obs => {
-    ctx.fillStyle = obs.destructible ? "#bf8f00" : "#de3c4b";
-    drawRoundedRect(obs.x, obs.y, obs.w, obs.h, 8);
+    drawBlock(obs.x, obs.y, obs.w, obs.h, obs.destructible ? "#bf8f00" : "#de3c4b");
   });
 
   level.enemies.forEach(enemy => {
-    ctx.fillStyle = "#ffb300";
-    drawRoundedRect(enemy.x, enemy.y, enemy.w, enemy.h, 10);
+    drawBlock(enemy.x, enemy.y, enemy.w, enemy.h, "#ffb300");
     ctx.fillStyle = "#3a1f47";
     ctx.fillRect(enemy.x + 8, enemy.y + 10, enemy.w - 16, 8);
     ctx.fillRect(enemy.x + 10, enemy.y + 22, enemy.w - 20, 6);
@@ -165,20 +159,26 @@ function drawScene() {
     ctx.fillText("+", pickup.x + pickup.w / 2, pickup.y + pickup.h / 2);
   });
 
-  ctx.fillStyle = "#ffd25f";
-  ctx.fillRect(level.goalX, level.goalY, 50, 80);
+  drawBlock(level.goalX, level.goalY, 50, 80, "#ffd25f");
   ctx.fillStyle = "#2a4d69";
   ctx.fillRect(level.goalX + 10, level.goalY + 10, 30, 60);
+  ctx.strokeStyle = "#1c1c1c";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(level.goalX, level.goalY, 50, 80);
 
   state.bullets.forEach(bullet => {
     ctx.fillStyle = "rgba(135, 206, 250, 0.95)";
-    ctx.beginPath();
-    ctx.arc(bullet.x, bullet.y, bullet.r, 0, Math.PI * 2);
-    ctx.fill();
+    ctx.fillRect(bullet.x - bullet.r, bullet.y - bullet.r, bullet.r * 2, bullet.r * 2);
+    ctx.strokeStyle = "#0a3f5a";
+    ctx.lineWidth = 2;
+    ctx.strokeRect(bullet.x - bullet.r, bullet.y - bullet.r, bullet.r * 2, bullet.r * 2);
   });
 
   ctx.fillStyle = "#ffd43b";
-  drawRoundedRect(state.player.x, state.player.y, state.player.w, state.player.h, 10);
+  drawBlock(state.player.x, state.player.y, state.player.w, state.player.h, "#ffd43b", false);
+  ctx.strokeStyle = "#1c1c1c";
+  ctx.lineWidth = 2;
+  ctx.strokeRect(state.player.x, state.player.y, state.player.w, state.player.h);
   ctx.fillStyle = "#000";
   ctx.fillRect(state.player.x + 10, state.player.y + 16, 6, 6);
   ctx.fillRect(state.player.x + 24, state.player.y + 16, 6, 6);

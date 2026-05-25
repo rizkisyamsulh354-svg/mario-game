@@ -12,21 +12,25 @@
 
 body {
   margin: 0;
-  background: linear-gradient(180deg, #a0dbff 0%, #64b5f6 100%);
+  background: #3b75b7;
   color: var(--text);
-  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-family: "Courier New", Courier, monospace;
   display: flex;
   justify-content: center;
   min-height: 100vh;
   padding: 20px;
+  background-image:
+    repeating-linear-gradient(45deg, rgba(255,255,255,0.04) 0 8px, transparent 8px 16px),
+    repeating-linear-gradient(-45deg, rgba(255,255,255,0.04) 0 8px, transparent 8px 16px);
 }
 
 .game-shell {
   width: min(960px, 100%);
-  background: var(--panel);
-  border-radius: 20px;
-  box-shadow: 0 20px 60px var(--shadow);
-  padding: 20px;
+  background: #eef6ff;
+  border-radius: 12px;
+  box-shadow: 0 16px 40px rgba(0,0,0,0.25);
+  padding: 18px;
+  border: 4px solid #1c3e80;
 }
 
 header {
@@ -51,10 +55,11 @@ h1 {
 
 canvas {
   width: 100%;
-  border-radius: 16px;
+  border-radius: 8px;
   margin-top: 20px;
-  border: 4px solid #ffec57;
-  background: linear-gradient(180deg, #a7f2ff 0%, #9ad4ff 60%, #8dc7ff 100%);
+  border: 6px solid #1c3e80;
+  background: #89d9ff;
+  image-rendering: pixelated;
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.4);
 }
 
